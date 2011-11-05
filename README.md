@@ -21,10 +21,10 @@ a console program which exercises the full SData CRUD support of SDataEntityObje
 
 This program requires following dependencies (not included):
 
-- Sage.SData.Client.dll (Sage SData Client Library for .NET)
-- Sage.Platform.dll (from a Gobi/SLX Platform installation)
-- System.dll (from your local .NET install)
-- Sage.Entity.Intefaces.dll (Generated from your Gobi/SLX installation)
+	- Sage.SData.Client.dll (Sage SData Client Library for .NET)
+	- Sage.Platform.dll (from a Gobi/SLX Platform installation)
+	- System.dll (from your local .NET install)
+	- Sage.Entity.Intefaces.dll (Generated from your Gobi/SLX installation)
 
 
 
