@@ -15,7 +15,7 @@ SData Gobi/SLX Entity Translator Library and PowerTools
   - SL_Customer (as SLCustomer)
   - ST_Product (as STProduct)
   - ST_ProductGroup (as STProductGroup)
-  - ST_StockGLCrossReference (as STStockGLCrossReference)**
+  - ST_StockGLCrossReference (as STStockGLCrossReference)
 
 This repository contains the following tools:
 
