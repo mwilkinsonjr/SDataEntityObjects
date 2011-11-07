@@ -297,7 +297,6 @@ namespace SDataEntityObjects.SData
         {
             return GetPlural(GetEntityName(type));
 
-
         }
 
         /// <summary>
@@ -310,27 +309,6 @@ namespace SDataEntityObjects.SData
 
             return name;
 
-            //// SLX Special Names (Do not obey naming convention)
-            //if (name.ToUpper() == "USERINFO")
-            //    return "UserInfo";
-            //if (name.ToUpper() == "SECCODE")
-            //    return "Owners";
-            //if (name.ToUpper() == "USERSECURITY")
-            //    return "Users";
-            //if (name.ToUpper() == "HISTORY")
-            //    return "History";
-            //if (name.ToUpper() == "OWNERRIGHTS")
-            //    return "OwnerRights";
-
-            //// Standard Pluralization
-            //name = name.ToLowerInvariant().Trim();
-            //if (name.EndsWith("y"))
-            //    return name.Substring(0, name.Length - 1) + "ies";
-            //if (name.EndsWith("s"))
-            //    return name + "es";
-            //if (name.EndsWith("o"))
-            //    return name + "es";
-            //return name + "s";
         }
 
         #region Public methods to retrieve Entities
