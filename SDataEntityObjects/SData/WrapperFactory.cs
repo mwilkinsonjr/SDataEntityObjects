@@ -58,6 +58,8 @@ namespace SDataEntityObjects.SData
                 DisplayValue = "Description";
             if (interfaceType.GetMember("Name").Count() > 0)
                 DisplayValue = "Name";
+            if (interfaceType.GetMember("Id").Count() > 0)
+                DisplayValue = "Id";
 
             if (interfaceType.GetCustomAttributes(typeof(Sage.Platform.Orm.Attributes.DisplayValuePropertyNameAttribute), false).Count() > 0)
             {
@@ -76,17 +78,38 @@ namespace SDataEntityObjects.SData
             }
 
             CodeMemberProperty codeProperty = new CodeMemberProperty();
-            codeProperty.Name = "DisplayValue";
-            codeProperty.Type = new CodeTypeReference(typeof(object));
-            codeProperty.Attributes = MemberAttributes.Public;
-            codeProperty.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                        new CodePropertyReferenceExpression(
-                            new CodeThisReferenceExpression(),
-                            DisplayValue
+            if (DisplayValue != "")
+            {
+
+                codeProperty.Name = "DisplayValue";
+                codeProperty.Type = new CodeTypeReference(typeof(object));
+                codeProperty.Attributes = MemberAttributes.Public;
+                codeProperty.GetStatements.Add(
+                    new CodeMethodReturnStatement(
+                            new CodePropertyReferenceExpression(
+                                new CodeThisReferenceExpression(),
+                                DisplayValue
+                            )
                         )
-                    )
-            );
+                );
+            }
+            else
+            {
+                codeProperty.Name = "DisplayValue";
+                codeProperty.Type = new CodeTypeReference(typeof(object));
+                codeProperty.Attributes = MemberAttributes.Public;
+                codeProperty.GetStatements.Add(
+                    new CodeMethodReturnStatement(
+                            new CodePropertyReferenceExpression(
+                                new CodeThisReferenceExpression(),
+                                "Id"
+                            )
+                        )
+                );
+
+
+
+            }
             typeDeclatation.Members.Add(codeProperty);
 
 

@@ -100,7 +100,7 @@ namespace SDataEntityObjects.SData
         }
 
         /// <summary>
-        /// Method is called in the generated properties to return an interface entity property (IAccount, IContact).
+        /// Method is called in the generated properties to return an interface entity property (ISL_Customer, IContact).
         /// Lazy loading is performed if the value is not present
         /// </summary>
         /// <typeparam name="T"></typeparam>

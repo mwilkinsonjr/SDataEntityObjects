@@ -18,8 +18,8 @@ namespace SDataEntityObjects.ConsoleTest
                 new SDataContextConfiguration()
                 {
                     Servername = "localhost",
-                    Port = 3333,
-                    Username = "lee",
+                    Port = 4444,
+                    Username = "manager",
                     Password = String.Empty
                 });
         }
@@ -35,95 +35,99 @@ namespace SDataEntityObjects.ConsoleTest
 
         private static void PerformTests(IClientContext context)
         {
-            IAccount Account;
-            IList<IAccount> AccountList;
+            ISL_Customer Customer;
+            IList<ISL_Customer> CustomerList;
 
             using (new CustomStopWatch("Test 1"))
             {
-                Console.WriteLine("Test 1: Get an SLX entity by ID (Account with Nested Address)");
-                Account = context.GetById<IAccount>("AGHEA0002669", "Address");
-                Console.WriteLine("Account.AccountName = " + Account.AccountName);
-                Console.WriteLine("Account.Address.City = " + Account.Address.City);                
+                Console.WriteLine("Test 1: Get an entity by ID (SLCustomer BIKESHOP)");
+                Customer = context.GetById<ISL_Customer>("BIKESHOP");
+                Console.WriteLine("Customer.Name = " + Customer.Name);
+                Console.WriteLine("Customer.YearToDateSales = " + Customer.YearToDateSales);                
             }
             Console.WriteLine("--- Press any key to continue ---"); 
             Console.ReadKey();
-            using (new CustomStopWatch("Test 2"))
-            {
-                Console.WriteLine("Test 2: Get an entity calculated property");
-                Console.WriteLine("Account.Address.FullAddress = " + Account.Address.FullAddress);
-            }
-            Console.WriteLine("--- Press any key to continue ---");
-            Console.ReadKey();            
-            using (new CustomStopWatch("Test 3"))
-            {
-                Console.WriteLine("Test 3: Call an entity method");
-                Console.WriteLine("Account.Address.FormatFullAddress() returns: " + Account.Address.FormatFullAddress());
-            }
-            Console.WriteLine("--- Press any key to continue ---");
-            Console.ReadKey();
-            using (new CustomStopWatch("Test 4"))
-            {
-                Console.WriteLine("Test 4: Lazy Load entity traversal");                
-                Console.WriteLine("Account.Contact.Count returns:" + 
-                    Account.Contacts.Count.ToString());
-                foreach (IContact Contact in Account.Contacts)
-                {
-                    Console.WriteLine("Contact NamePFL & Title = " + 
-                        Contact.NamePFL + ", " + Contact.Title);
-                }
-                Console.WriteLine("Account.Opportunities.Count returns:" + 
-                    Account.Opportunities.Count.ToString());
-                foreach (IOpportunity Opportunity in Account.Opportunities)
-                {
-                    Console.WriteLine("Opportunity Description & SalesPotential = " + 
-                        Opportunity.Description + ", " + Opportunity.SalesPotential.ToString());
-                    Console.WriteLine(" OpportunityProduct Count = " + 
-                        Opportunity.Products.Count.ToString());
-                    foreach (IOpportunityProduct OpportunityProduct in Opportunity.Products)
-                    {
-                        Console.WriteLine("  Product Name, Quantity & Price = " + 
-                            OpportunityProduct.Product.Name + ", " + 
-                            OpportunityProduct.Quantity.ToString() + ", " + 
-                            OpportunityProduct.ExtendedPrice.ToString());
-                    }
-                }
-            }
-            Console.WriteLine("--- Press any key to continue ---");
-            Console.ReadKey();
+
+            //using (new CustomStopWatch("Test 2"))
+            //{
+            //    Console.WriteLine("Test 2: Get an entity calculated property");
+            //    Console.WriteLine("Account.Address.FullAddress = " + Account.Address.FullAddress);
+            //}
+            //Console.WriteLine("--- Press any key to continue ---");
+            //Console.ReadKey();            
+            //using (new CustomStopWatch("Test 3"))
+            //{
+            //    Console.WriteLine("Test 3: Call an entity method");
+            //    Console.WriteLine("Account.Address.FormatFullAddress() returns: " + Account.Address.FormatFullAddress());
+            //}
+            //Console.WriteLine("--- Press any key to continue ---");
+            //Console.ReadKey();
+            //using (new CustomStopWatch("Test 4"))
+            //{
+            //    Console.WriteLine("Test 4: Lazy Load entity traversal");                
+            //    Console.WriteLine("Account.Contact.Count returns:" + 
+            //        Account.Contacts.Count.ToString());
+            //    foreach (IContact Contact in Account.Contacts)
+            //    {
+            //        Console.WriteLine("Contact NamePFL & Title = " + 
+            //            Contact.NamePFL + ", " + Contact.Title);
+            //    }
+            //    Console.WriteLine("Account.Opportunities.Count returns:" + 
+            //        Account.Opportunities.Count.ToString());
+            //    foreach (IOpportunity Opportunity in Account.Opportunities)
+            //    {
+            //        Console.WriteLine("Opportunity Description & SalesPotential = " + 
+            //            Opportunity.Description + ", " + Opportunity.SalesPotential.ToString());
+            //        Console.WriteLine(" OpportunityProduct Count = " + 
+            //            Opportunity.Products.Count.ToString());
+            //        foreach (IOpportunityProduct OpportunityProduct in Opportunity.Products)
+            //        {
+            //            Console.WriteLine("  Product Name, Quantity & Price = " + 
+            //                OpportunityProduct.Product.Name + ", " + 
+            //                OpportunityProduct.Quantity.ToString() + ", " + 
+            //                OpportunityProduct.ExtendedPrice.ToString());
+            //        }
+            //    }
+            //}
+            //Console.WriteLine("--- Press any key to continue ---");
+            //Console.ReadKey();
+            
             using (new CustomStopWatch("Test 5"))
             {
                 Console.WriteLine("Test 5: LINQ Query for SLX Entities");
-                AccountList = context.CreateQuery<IAccount>().Where(x => x.AccountName.StartsWith("Sa")).ToList();
-                Console.WriteLine("There are " + AccountList.Count + " Accounts that start with 'Sa':");
-                foreach (IAccount LAccount in AccountList)
+                CustomerList = context.CreateQuery<ISL_Customer>().Where(x => x.Name.StartsWith("M")).ToList();
+                Console.WriteLine("There are " + CustomerList.Count + " Accounts that start with 'M':");
+                foreach (ISL_Customer LCustomer in CustomerList)
                 {
-                    Console.WriteLine("Account Name & Address City = " + LAccount.AccountName + ", " + LAccount.Address.City);
+                    Console.WriteLine("Account Name & Address1 Field = " + LCustomer.Name.Trim() +
+                        ", " + LCustomer.AddressLine1);
                 }
             }
             Console.WriteLine("--- Press any key to continue ---");
             Console.ReadKey();
-            using (new CustomStopWatch("Test 6"))
-            {
-                Console.WriteLine("Test 6: Create New SLX Entities");
-                IAccount newAccount = context.CreateNew<IAccount>();
-                newAccount.AccountName = "Sage (UK) Limited";
-                newAccount.MainPhone = "+44 (0)191 294 3000";
-                newAccount.Fax = "+44 (0) 118 927 0615";
-                newAccount.WebAddress = "www.sage.co.uk";
-                newAccount.Save();
-                Console.WriteLine("Account " + newAccount.ToString() + "Created, " +
-                    "ID = " + newAccount.Id.ToString());
-                // Save creates a Primary Address object automatically
-                newAccount.Address.Description = "Mailing";
-                newAccount.Address.Address1 = "Sage House";
-                newAccount.Address.Address2 = "Wharfdale Road";
-                newAccount.Address.City = "Winnersh";
-                newAccount.Address.State = "Wokingham";
-                newAccount.Address.PostalCode = "RG41 5RD";
-                newAccount.Address.Country = "England";
-                newAccount.Address.Save();
-                newAccount.Save();
-                Console.WriteLine("Account Primary Address Created, ID = " + newAccount.Address.Id.ToString());
+            
+            //using (new CustomStopWatch("Test 6"))
+            //{
+            //    Console.WriteLine("Test 6: Create New SLX Entities");
+            //    ISL_Customer newAccount = context.CreateNew<ISL_Customer>();
+            //    newAccount.AccountName = "Sage (UK) Limited";
+            //    newAccount.MainPhone = "+44 (0)191 294 3000";
+            //    newAccount.Fax = "+44 (0) 118 927 0615";
+            //    newAccount.WebAddress = "www.sage.co.uk";
+            //    newAccount.Save();
+            //    Console.WriteLine("Account " + newAccount.ToString() + "Created, " +
+            //        "ID = " + newAccount.Id.ToString());
+            //    // Save creates a Primary Address object automatically
+            //    newAccount.Address.Description = "Mailing";
+            //    newAccount.Address.Address1 = "Sage House";
+            //    newAccount.Address.Address2 = "Wharfdale Road";
+            //    newAccount.Address.City = "Winnersh";
+            //    newAccount.Address.State = "Wokingham";
+            //    newAccount.Address.PostalCode = "RG41 5RD";
+            //    newAccount.Address.Country = "England";
+            //    newAccount.Address.Save();
+            //    newAccount.Save();
+            //    Console.WriteLine("Account Primary Address Created, ID = " + newAccount.Address.Id.ToString());
                 // Related Contact
                 //IContact Contact = context.CreateNew<IContact>();
                 //newAccount.Contacts.Add(Contact);
@@ -187,19 +191,19 @@ namespace SDataEntityObjects.ConsoleTest
 
 
 
-            Console.WriteLine("--- Press any key to continue ---");
-            Console.ReadKey();
-            using (new CustomStopWatch("Test 8"))
-            {
-                Console.WriteLine("Test 8: Delete SLX Entities");
-                AccountList = context.CreateQuery<IAccount>().Where(x => x.AccountName.Equals("Sage (UK) Limited")).ToList();
-                foreach (IAccount LAccount in AccountList)
-                {
-                    LAccount.Delete();
-                }
-            }
-            Console.WriteLine("--- Press any key to continue ---");
-            Console.ReadKey();
+            //Console.WriteLine("--- Press any key to continue ---");
+            //Console.ReadKey();
+            //using (new CustomStopWatch("Test 8"))
+            //{
+            //    Console.WriteLine("Test 8: Delete SLX Entities");
+            //    AccountList = context.CreateQuery<ISL_Customer>().Where(x => x.AccountName.Equals("Sage (UK) Limited")).ToList();
+            //    foreach (ISL_Customer LAccount in AccountList)
+            //    {
+            //        LAccount.Delete();
+            //    }
+            //}
+            //Console.WriteLine("--- Press any key to continue ---");
+            //Console.ReadKey();
 
 
 
@@ -222,7 +226,7 @@ namespace SDataEntityObjects.ConsoleTest
                 //account.AccountExtension.Account = account;
                 //account.AccountExtension.Save();
 
-                //IAccountExtension extension = account.AccountExtension;
+                //ISL_CustomerExtension extension = account.AccountExtension;
 
                 //if (extension == null)
                 //    Console.WriteLine("extension is missing");
@@ -235,7 +239,7 @@ namespace SDataEntityObjects.ConsoleTest
                 //{
                 //    int counter = 0;
 
-                //    foreach (var account in context.CreateQuery<IAccount>().Where(x => x.Id == "AA2EK0013901"))
+                //    foreach (var account in context.CreateQuery<ISL_Customer>().Where(x => x.Id == "AA2EK0013901"))
                 //    {
                 //        //Console.WriteLine("{0}, {1}", account.AccountName, account.Id);
                 //        counter++;
@@ -244,16 +248,16 @@ namespace SDataEntityObjects.ConsoleTest
                 //}
 
 
-                //IAccount newAccount = context.CreateNew<IAccount>();
+                //ISL_Customer newAccount = context.CreateNew<ISL_Customer>();
 
                 //newAccount.AccountName = "Testkunde 123";
                 //newAccount.Save();
 
-                //var thing = context.CreateQuery<IAccount>();
+                //var thing = context.CreateQuery<ISL_Customer>();
 
 
 
-                //foreach (var account in context.CreateQuery<IAccount>().Where(x => x.AccountName.StartsWith("BE Bosworth")))
+                //foreach (var account in context.CreateQuery<ISL_Customer>().Where(x => x.AccountName.StartsWith("BE Bosworth")))
                 //{
                 //    var result = account.CanChangeOwner();
                 //    Console.WriteLine("CanChangeOwner returns a {0} value", result.ToString());
@@ -286,7 +290,7 @@ namespace SDataEntityObjects.ConsoleTest
                 //    } opportunity.ValidateOpportunity();
                 //}
             
-        }
+    
 
 
 

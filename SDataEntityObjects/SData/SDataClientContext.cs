@@ -31,7 +31,7 @@ namespace SDataEntityObjects.SData
             {
                 if (_Service == null)
                 {
-                    _Service = new SDataService(String.Format("http://{0}:{1}/sdata/slx/dynamic/-", _configuration.Servername, _configuration.Port), _configuration.Username, _configuration.Password);
+                    _Service = new SDataService(String.Format("http://{0}:{1}/ExtSData/sage1000/dynamic/demo", _configuration.Servername, _configuration.Port), _configuration.Username, _configuration.Password);
                     // Obsolete
                     //_Service.Initialize();
                 }
@@ -277,7 +277,7 @@ namespace SDataEntityObjects.SData
             //entityName = entityName.Substring(0, 1).ToUpper() + entityName.Substring(1).ToLower();
 
             // Just use the name based in, just without the leading "I"
-            string entityName = type.Name.Substring(1);
+            string entityName = type.Name.Substring(1).Replace("_", "");
 
 
             return entityName;
@@ -307,28 +307,30 @@ namespace SDataEntityObjects.SData
         /// <returns></returns>
         private string GetPlural(string name)
         {
-            
-            // SLX Special Names (Do not obey naming convention)
-            if (name.ToUpper() == "USERINFO")
-                return "UserInfo";
-            if (name.ToUpper() == "SECCODE")
-                return "Owners";
-            if (name.ToUpper() == "USERSECURITY")
-                return "Users";
-            if (name.ToUpper() == "HISTORY")
-                return "History";
-            if (name.ToUpper() == "OWNERRIGHTS")
-                return "OwnerRights";
 
-            // Standard Pluralization
-            name = name.ToLowerInvariant().Trim();
-            if (name.EndsWith("y"))
-                return name.Substring(0, name.Length - 1) + "ies";
-            if (name.EndsWith("s"))
-                return name + "es";
-            if (name.EndsWith("o"))
-                return name + "es";
-            return name + "s";
+            return name;
+
+            //// SLX Special Names (Do not obey naming convention)
+            //if (name.ToUpper() == "USERINFO")
+            //    return "UserInfo";
+            //if (name.ToUpper() == "SECCODE")
+            //    return "Owners";
+            //if (name.ToUpper() == "USERSECURITY")
+            //    return "Users";
+            //if (name.ToUpper() == "HISTORY")
+            //    return "History";
+            //if (name.ToUpper() == "OWNERRIGHTS")
+            //    return "OwnerRights";
+
+            //// Standard Pluralization
+            //name = name.ToLowerInvariant().Trim();
+            //if (name.EndsWith("y"))
+            //    return name.Substring(0, name.Length - 1) + "ies";
+            //if (name.EndsWith("s"))
+            //    return name + "es";
+            //if (name.EndsWith("o"))
+            //    return name + "es";
+            //return name + "s";
         }
 
         #region Public methods to retrieve Entities

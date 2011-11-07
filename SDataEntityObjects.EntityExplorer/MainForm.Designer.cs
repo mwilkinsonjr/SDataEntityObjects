@@ -199,7 +199,7 @@
             this.txtLINQ.Name = "txtLINQ";
             this.txtLINQ.Size = new System.Drawing.Size(700, 47);
             this.txtLINQ.TabIndex = 0;
-            this.txtLINQ.Text = "from a in IAccount\r\nwhere a.AccountName.StartsWith(\"C\")\r\norderby a.AccountName se" +
+            this.txtLINQ.Text = "from a in ISL_Customer\r\nwhere a.AccountName.StartsWith(\"C\")\r\norderby a.AccountName se" +
                 "lect a";
             // 
             // statusStrip
