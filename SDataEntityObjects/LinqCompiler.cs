@@ -88,7 +88,7 @@ namespace SDataEntityObjects.Linq.Compiler
         private CompilerResults GetCompilerResults()
         {
             IDictionary<string, string> options = new Dictionary<string, string>();
-            options.Add("CompilerVersion", "v3.5");
+            options.Add("CompilerVersion", "v4.0");
             CodeDomProvider provider = new CSharpCodeProvider(options);
 
             CodeCompileUnit compileUnit = GetCompileUnit();
