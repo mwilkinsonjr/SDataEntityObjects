@@ -175,9 +175,13 @@ namespace SDataEntityObjects.SData
             CompilerParameters compilerParameters = new CompilerParameters();
 
             compilerParameters.ReferencedAssemblies.Add(Assembly.GetExecutingAssembly().Location);
+
+
             string currentBinLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-            compilerParameters.ReferencedAssemblies.Add(Path.Combine(currentBinLocation, "System.dll"));
+            string systemLocation = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(System.AppDomain)).Location);
+
+            compilerParameters.ReferencedAssemblies.Add(Path.Combine(systemLocation, "System.dll"));
             compilerParameters.ReferencedAssemblies.Add(Path.Combine(currentBinLocation, "Sage.Entity.Interfaces.dll"));
             compilerParameters.ReferencedAssemblies.Add(Path.Combine(currentBinLocation, "Sage.Platform.dll"));
             compilerParameters.ReferencedAssemblies.Add(Path.Combine(currentBinLocation, "Sage.SData.Client.dll"));
