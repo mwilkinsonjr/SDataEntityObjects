@@ -63,7 +63,7 @@ namespace SDataEntityObjects.EntityExplorer
             // Default Settings
             Servername = "localhost";
             Port = 3333;
-            Username = "lee";
+            Username = "";
             Password = "";
             MaxRequestSize = 20;
 
@@ -471,7 +471,7 @@ namespace SDataEntityObjects.EntityExplorer
             LQ.AddSource("ITicketSolution", Context.CreateQuery<ITicketSolution>().AsEnumerable());
             LQ.AddSource("ITicketSolutionType", Context.CreateQuery<ITicketSolutionType>().AsEnumerable());
             LQ.AddSource("IUnitOfMeasure", Context.CreateQuery<IUnitOfMeasure>().AsEnumerable());
-            LQ.AddSource("IUnitOfMeasureGroup", Context.CreateQuery<IUnitOfMeasureGroup>().AsEnumerable());
+            // LQ.AddSource("IUnitOfMeasureGroup", Context.CreateQuery<IUnitOfMeasureGroup>().AsEnumerable());
             LQ.AddSource("IUrgency", Context.CreateQuery<IUrgency>().AsEnumerable());
             LQ.AddSource("IUser", Context.CreateQuery<IUser>().AsEnumerable());
             LQ.AddSource("IUserActivity", Context.CreateQuery<IUserActivity>().AsEnumerable());
