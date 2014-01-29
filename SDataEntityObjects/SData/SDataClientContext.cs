@@ -31,7 +31,10 @@ namespace SDataEntityObjects.SData
             {
                 if (_Service == null)
                 {
-                    _Service = new SDataService(String.Format("http://{0}:{1}/sdata/slx/dynamic/-", _configuration.Servername, _configuration.Port), _configuration.Username, _configuration.Password);
+                    if (_configuration.Username == "")
+                        _Service = new SDataService(String.Format("http://{0}:{1}/sdata/slx/dynamic/-", _configuration.Servername, _configuration.Port));
+                    else
+                        _Service = new SDataService(String.Format("http://{0}:{1}/sdata/slx/dynamic/-", _configuration.Servername, _configuration.Port), _configuration.Username, _configuration.Password);
                     // Obsolete
                     //_Service.Initialize();
                 }
