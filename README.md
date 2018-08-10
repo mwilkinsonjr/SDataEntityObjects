@@ -10,17 +10,18 @@ A .NET library that translates [SData](http://sdata.sage.com) feeds to and from 
 *EntityExplorer*:
 A windows forms program that can be used to explore the Gobi/SLX entity model through SData:
 
-![EntityExplorer] (https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/EntityExplorer.jpg?raw=true)
+
+![EntityExplorer](https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/EntityExplorer.jpg?raw=true)
 
 *SDataPad*:
 A windows forms program that can be used to query the Gobi/SLX entity model through SData using LINQ syntax:
 
-![SDataPad] (https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/SDataPad.jpg?raw=true)
+![SDataPad](https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/SDataPad.jpg?raw=true)
 
 *ConsoleTest*:
 A console program which exercises the full SData CRUD support of SDataEntityObjects:
 
-![ConsoleTest] (https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/ConsoleTest.jpg?raw=true)
+![ConsoleTest](https://github.com/mwilkinsonjr/SDataEntityObjects/blob/master/Screenshots/ConsoleTest.jpg?raw=true)
 
 This program requires following external dependencies (not included):
 
